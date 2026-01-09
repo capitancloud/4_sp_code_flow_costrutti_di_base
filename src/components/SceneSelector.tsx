@@ -14,6 +14,7 @@ const scenes: Scene[] = [
   { id: "variables", title: "Variabili", icon: "□", description: "Memoria e stato", color: "accent" },
   { id: "functions", title: "Funzioni", icon: "ƒ", description: "Input → Output", color: "warning" },
   { id: "arrays", title: "Array", icon: "▤", description: "Liste indicizzate", color: "primary" },
+  { id: "events", title: "Eventi", icon: "⚡", description: "Trigger → Reazione", color: "secondary" },
 ];
 
 interface SceneSelectorProps {

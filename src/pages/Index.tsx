@@ -6,6 +6,7 @@ import ForLoopScene from "@/components/scenes/ForLoopScene";
 import VariablesScene from "@/components/scenes/VariablesScene";
 import FunctionsScene from "@/components/scenes/FunctionsScene";
 import ArrayScene from "@/components/scenes/ArrayScene";
+import EventsScene from "@/components/scenes/EventsScene";
 
 const Index = () => {
   const [currentScene, setCurrentScene] = useState("if-else");
@@ -22,6 +23,8 @@ const Index = () => {
         return <FunctionsScene />;
       case "arrays":
         return <ArrayScene />;
+      case "events":
+        return <EventsScene />;
       default:
         return <IfElseScene />;
     }
