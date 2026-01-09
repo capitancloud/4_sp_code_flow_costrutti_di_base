@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const IfElseScene = () => {
@@ -14,20 +14,20 @@ const IfElseScene = () => {
     setIsAnimating(true);
     setOrbPosition("start");
     
-    setTimeout(() => setOrbPosition("gate"), 500);
-    setTimeout(() => setOrbPosition(condition ? "true" : "false"), 1200);
+    setTimeout(() => setOrbPosition("gate"), 600);
+    setTimeout(() => setOrbPosition(condition ? "true" : "false"), 1400);
     setTimeout(() => {
       setIsAnimating(false);
       setOrbPosition("start");
-    }, 2500);
+    }, 3000);
   };
 
   const getOrbCoordinates = () => {
     switch (orbPosition) {
       case "start": return { x: 0, y: 0 };
       case "gate": return { x: 200, y: 0 };
-      case "true": return { x: 350, y: -80 };
-      case "false": return { x: 350, y: 80 };
+      case "true": return { x: 380, y: -90 };
+      case "false": return { x: 380, y: 90 };
       default: return { x: 0, y: 0 };
     }
   };
@@ -35,130 +35,288 @@ const IfElseScene = () => {
   return (
     <div className="flex flex-col gap-8">
       {/* Visualization Area */}
-      <div className="scene-card min-h-[400px] flex items-center justify-center relative overflow-visible">
+      <div className="scene-card min-h-[450px] flex items-center justify-center relative overflow-visible">
+        {/* SVG Gradients */}
+        <svg className="absolute" width="0" height="0">
+          <defs>
+            <linearGradient id="gradient-primary" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(174 100% 50%)" />
+              <stop offset="50%" stopColor="hsl(195 100% 45%)" />
+              <stop offset="100%" stopColor="hsl(210 100% 50%)" />
+            </linearGradient>
+            <linearGradient id="gradient-secondary" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(20 100% 60%)" />
+              <stop offset="50%" stopColor="hsl(35 100% 55%)" />
+              <stop offset="100%" stopColor="hsl(45 100% 50%)" />
+            </linearGradient>
+            <filter id="glow-cyan">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="glow-orange">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+
         <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: "visible" }}>
           {/* True Path */}
-          <path
-            d="M 160 200 L 260 200 Q 280 200 290 180 L 350 120"
-            className={`flow-path transition-all duration-500 ${orbPosition === "true" ? "flow-path-active" : ""}`}
-            strokeDasharray="5 5"
+          <motion.path
+            d="M 160 225 L 280 225 Q 310 225 325 195 L 390 130"
+            className="flow-path"
+            initial={{ pathLength: 0 }}
+            animate={{ 
+              pathLength: 1,
+              stroke: orbPosition === "true" ? "url(#gradient-primary)" : undefined,
+              filter: orbPosition === "true" ? "url(#glow-cyan)" : undefined,
+            }}
+            transition={{ duration: 0.5 }}
+            strokeDasharray="8 4"
           />
           {/* False Path */}
-          <path
-            d="M 160 200 L 260 200 Q 280 200 290 220 L 350 280"
-            className={`flow-path transition-all duration-500 ${orbPosition === "false" ? "flow-path-false" : ""}`}
-            strokeDasharray="5 5"
+          <motion.path
+            d="M 160 225 L 280 225 Q 310 225 325 255 L 390 320"
+            className="flow-path"
+            initial={{ pathLength: 0 }}
+            animate={{ 
+              pathLength: 1,
+              stroke: orbPosition === "false" ? "url(#gradient-secondary)" : undefined,
+              filter: orbPosition === "false" ? "url(#glow-orange)" : undefined,
+            }}
+            transition={{ duration: 0.5 }}
+            strokeDasharray="8 4"
           />
         </svg>
 
-        {/* Start Point */}
+        {/* Start Point with pulse ring */}
         <div className="absolute left-12 top-1/2 -translate-y-1/2">
-          <div className="w-4 h-4 rounded-full bg-muted-foreground/50" />
+          <motion.div 
+            className="w-5 h-5 rounded-full bg-primary/60"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.div 
+            className="absolute inset-0 w-5 h-5 rounded-full border-2 border-primary/30"
+            animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
         </div>
 
         {/* Gate/Condition */}
         <motion.div 
-          className={`absolute left-[220px] top-1/2 -translate-y-1/2 w-20 h-20 rounded-xl flex items-center justify-center font-mono text-lg font-bold transition-all duration-300 ${condition ? "gate-true text-primary" : "gate-false text-secondary"}`}
-          animate={{ scale: orbPosition === "gate" ? 1.1 : 1 }}
+          className={`absolute left-[220px] top-1/2 -translate-y-1/2 w-24 h-24 rounded-2xl flex flex-col items-center justify-center font-mono transition-all duration-500 ${condition ? "gate-true text-primary" : "gate-false text-secondary"}`}
+          animate={{ 
+            scale: orbPosition === "gate" ? [1, 1.15, 1.1] : 1,
+            rotate: orbPosition === "gate" ? [0, 5, -5, 0] : 0,
+          }}
+          transition={{ duration: 0.4 }}
         >
-          {condition ? "✓" : "✗"}
+          <motion.span 
+            className="text-4xl"
+            animate={{ 
+              scale: orbPosition === "gate" ? [1, 1.3, 1] : 1,
+            }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            {condition ? "✓" : "✗"}
+          </motion.span>
+          <span className="text-xs mt-1 opacity-70">gate</span>
         </motion.div>
 
         {/* True Endpoint */}
-        <div className="absolute right-16 top-[100px] flex items-center gap-3">
+        <motion.div 
+          className="absolute right-12 top-[90px] flex items-center gap-4"
+          animate={orbPosition === "true" ? { scale: [1, 1.1, 1] } : {}}
+          transition={{ duration: 0.4 }}
+        >
           <motion.div 
-            className={`w-16 h-16 rounded-xl flex items-center justify-center text-2xl transition-all duration-300 ${orbPosition === "true" ? "bg-primary/30 border-2 border-primary glow-primary" : "bg-muted border border-border"}`}
+            className={`w-20 h-20 rounded-2xl flex items-center justify-center text-3xl transition-all duration-500 ${orbPosition === "true" ? "bg-primary/30 border-2 border-primary glow-primary" : "bg-muted/30 border border-border/50"}`}
           >
             ✓
           </motion.div>
-          <span className="text-xs font-mono text-primary">TRUE</span>
-        </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-bold text-primary">TRUE</span>
+            <span className="text-xs text-muted-foreground">percorso vero</span>
+          </div>
+        </motion.div>
 
         {/* False Endpoint */}
-        <div className="absolute right-16 bottom-[100px] flex items-center gap-3">
+        <motion.div 
+          className="absolute right-12 bottom-[90px] flex items-center gap-4"
+          animate={orbPosition === "false" ? { scale: [1, 1.1, 1] } : {}}
+          transition={{ duration: 0.4 }}
+        >
           <motion.div 
-            className={`w-16 h-16 rounded-xl flex items-center justify-center text-2xl transition-all duration-300 ${orbPosition === "false" ? "bg-secondary/30 border-2 border-secondary glow-secondary" : "bg-muted border border-border"}`}
+            className={`w-20 h-20 rounded-2xl flex items-center justify-center text-3xl transition-all duration-500 ${orbPosition === "false" ? "bg-secondary/30 border-2 border-secondary glow-secondary" : "bg-muted/30 border border-border/50"}`}
           >
             ✗
           </motion.div>
-          <span className="text-xs font-mono text-secondary">FALSE</span>
-        </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-bold text-secondary">FALSE</span>
+            <span className="text-xs text-muted-foreground">percorso falso</span>
+          </div>
+        </motion.div>
 
         {/* Moving Data Orb */}
         <AnimatePresence>
           {isAnimating && (
             <motion.div
-              className="data-orb absolute"
-              initial={{ x: 50, y: 200, scale: 0 }}
+              className="data-orb absolute z-10"
+              initial={{ x: 50, y: 225, scale: 0, rotate: -180 }}
               animate={{ 
                 x: getOrbCoordinates().x + 50, 
-                y: getOrbCoordinates().y + 200,
-                scale: 1
+                y: getOrbCoordinates().y + 225,
+                scale: 1,
+                rotate: 0,
               }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              exit={{ scale: 0, opacity: 0, rotate: 180 }}
+              transition={{ 
+                type: "spring", 
+                damping: 15, 
+                stiffness: 80,
+                mass: 1.2,
+              }}
             >
-              {value}
+              <motion.span
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+              >
+                {value}
+              </motion.span>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Condition Label */}
-        <div className="absolute left-[200px] top-8 text-center">
-          <span className="font-mono text-sm text-muted-foreground">
-            valore ≥ {threshold}?
+        <motion.div 
+          className="absolute left-[200px] top-10 text-center glass rounded-xl px-4 py-2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <span className="font-mono text-sm">
+            <span className="text-muted-foreground">valore </span>
+            <span className="text-primary font-bold">≥</span>
+            <span className="text-muted-foreground"> {threshold}?</span>
           </span>
-        </div>
+        </motion.div>
+
+        {/* Animated background particles */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-primary/20"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + (i % 3) * 20}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.2, 0.5, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 0.3,
+            }}
+          />
+        ))}
       </div>
 
       {/* Controls */}
-      <div className="control-panel flex flex-wrap gap-6 items-center justify-center">
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-muted-foreground font-mono">VALORE</label>
-          <div className="flex items-center gap-3">
-            <button 
+      <motion.div 
+        className="control-panel flex flex-wrap gap-8 items-center justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="flex flex-col gap-3">
+          <label className="text-xs text-muted-foreground font-mono tracking-wider">VALORE</label>
+          <div className="flex items-center gap-4">
+            <motion.button 
               onClick={() => setValue(v => Math.max(0, v - 1))}
-              className="w-10 h-10 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center text-lg"
+              className="w-12 h-12 rounded-xl bg-muted/50 hover:bg-muted border border-border/50 flex items-center justify-center text-xl text-muted-foreground hover:text-foreground transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               −
-            </button>
-            <span className="w-12 text-center font-mono text-2xl text-primary">{value}</span>
-            <button 
+            </motion.button>
+            <motion.span 
+              key={value}
+              className="w-16 text-center font-mono text-3xl text-gradient-primary font-bold"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+            >
+              {value}
+            </motion.span>
+            <motion.button 
               onClick={() => setValue(v => Math.min(10, v + 1))}
-              className="w-10 h-10 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center text-lg"
+              className="w-12 h-12 rounded-xl bg-muted/50 hover:bg-muted border border-border/50 flex items-center justify-center text-xl text-muted-foreground hover:text-foreground transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               +
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-muted-foreground font-mono">SOGLIA</label>
-          <div className="flex items-center gap-3">
-            <button 
+        <div className="flex flex-col gap-3">
+          <label className="text-xs text-muted-foreground font-mono tracking-wider">SOGLIA</label>
+          <div className="flex items-center gap-4">
+            <motion.button 
               onClick={() => setThreshold(t => Math.max(0, t - 1))}
-              className="w-10 h-10 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center text-lg"
+              className="w-12 h-12 rounded-xl bg-muted/50 hover:bg-muted border border-border/50 flex items-center justify-center text-xl text-muted-foreground hover:text-foreground transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               −
-            </button>
-            <span className="w-12 text-center font-mono text-2xl text-muted-foreground">{threshold}</span>
-            <button 
+            </motion.button>
+            <span className="w-16 text-center font-mono text-3xl text-muted-foreground font-bold">{threshold}</span>
+            <motion.button 
               onClick={() => setThreshold(t => Math.min(10, t + 1))}
-              className="w-10 h-10 rounded-lg bg-muted hover:bg-muted/80 flex items-center justify-center text-lg"
+              className="w-12 h-12 rounded-xl bg-muted/50 hover:bg-muted border border-border/50 flex items-center justify-center text-xl text-muted-foreground hover:text-foreground transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               +
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        <button 
+        <motion.button 
           onClick={runAnimation}
           disabled={isAnimating}
-          className="interactive-button disabled:opacity-50 disabled:cursor-not-allowed"
+          className="interactive-button disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          whileHover={{ scale: isAnimating ? 1 : 1.05 }}
+          whileTap={{ scale: isAnimating ? 1 : 0.95 }}
         >
-          {isAnimating ? "..." : "Esegui"}
-        </button>
-      </div>
+          <span className="relative z-10 flex items-center gap-2">
+            {isAnimating ? (
+              <>
+                <motion.span
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                >
+                  ◐
+                </motion.span>
+                Eseguendo...
+              </>
+            ) : (
+              <>
+                <span>▶</span>
+                Esegui
+              </>
+            )}
+          </span>
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
