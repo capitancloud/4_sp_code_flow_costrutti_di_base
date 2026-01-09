@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SceneSelector from "@/components/SceneSelector";
 import IfElseScene from "@/components/scenes/IfElseScene";
+import IfElseIfScene from "@/components/scenes/IfElseIfScene";
+import SwitchScene from "@/components/scenes/SwitchScene";
 import ForLoopScene from "@/components/scenes/ForLoopScene";
 import VariablesScene from "@/components/scenes/VariablesScene";
 import FunctionsScene from "@/components/scenes/FunctionsScene";
@@ -15,6 +17,10 @@ const Index = () => {
     switch (currentScene) {
       case "if-else":
         return <IfElseScene />;
+      case "if-else-if":
+        return <IfElseIfScene />;
+      case "switch":
+        return <SwitchScene />;
       case "for-loop":
         return <ForLoopScene />;
       case "variables":
