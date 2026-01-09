@@ -102,6 +102,16 @@ const animations: AnimationCard[] = [
     gradient: "from-orange-500 to-red-500",
     icon: "🫧",
   },
+  // Integrazione
+  {
+    id: "complete-flow",
+    title: "Flusso Completo",
+    description: "Tutti i costrutti insieme in un algoritmo reale",
+    path: "/animations/complete-flow",
+    category: "Integrazione",
+    gradient: "from-violet-500 to-fuchsia-500",
+    icon: "🔗",
+  },
 ];
 
 const categories = [
@@ -112,6 +122,7 @@ const categories = [
   { id: "astrazione", label: "Astrazione", color: "text-teal-400" },
   { id: "reattivita", label: "Reattività", color: "text-rose-400" },
   { id: "ordinamento", label: "Ordinamento", color: "text-red-400" },
+  { id: "integrazione", label: "Integrazione", color: "text-fuchsia-400" },
 ];
 
 const getCategoryColor = (categoryLabel: string) => {
