@@ -135,9 +135,9 @@ const SceneSelector = ({ currentScene, onSceneChange }: SceneSelectorProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col gap-3 md:gap-4 w-full max-w-4xl mx-auto px-2 sm:px-0">
       {/* Category Buttons */}
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
         {categories.map((category, index) => {
           const isExpanded = expandedCategory === category.id;
           const hasActiveScene = category.scenes.some(s => s.id === currentScene);
@@ -151,14 +151,14 @@ const SceneSelector = ({ currentScene, onSceneChange }: SceneSelectorProps) => {
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${getColorClasses(category.color, isExpanded || hasActiveScene, true)}`}
+              className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg border-2 transition-all duration-300 ${getColorClasses(category.color, isExpanded || hasActiveScene, true)}`}
             >
-              <span className={`text-xl ${getIconColor(category.color)}`}>{category.icon}</span>
-              <span className="font-medium text-sm">{category.title}</span>
+              <span className={`text-base sm:text-xl ${getIconColor(category.color)}`}>{category.icon}</span>
+              <span className="font-medium text-xs sm:text-sm">{category.title}</span>
               <motion.span
                 animate={{ rotate: isExpanded ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
-                className="text-xs opacity-60"
+                className="text-[10px] sm:text-xs opacity-60"
               >
                 ▼
               </motion.span>
@@ -178,7 +178,7 @@ const SceneSelector = ({ currentScene, onSceneChange }: SceneSelectorProps) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-wrap gap-3 justify-center p-4 rounded-xl bg-card/50 border border-border">
+            <div className="flex flex-wrap gap-2 sm:gap-3 justify-center p-3 sm:p-4 rounded-xl bg-card/50 border border-border">
               {categories
                 .find(c => c.id === expandedCategory)
                 ?.scenes.map((scene, index) => {
@@ -196,25 +196,25 @@ const SceneSelector = ({ currentScene, onSceneChange }: SceneSelectorProps) => {
                       whileHover={isAvailable ? { scale: 1.05 } : {}}
                       whileTap={isAvailable ? { scale: 0.95 } : {}}
                       disabled={!isAvailable}
-                      className={`flex items-center gap-3 px-5 py-3 rounded-xl border-2 transition-all duration-300 
+                      className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-3 rounded-xl border-2 transition-all duration-300 
                         ${isAvailable 
                           ? getColorClasses(category.color, isActive, false) 
                           : "border-border/50 opacity-40 cursor-not-allowed"
                         }`}
                     >
-                      <span className={`text-2xl ${isAvailable ? getIconColor(category.color) : "text-muted-foreground"}`}>
+                      <span className={`text-xl sm:text-2xl ${isAvailable ? getIconColor(category.color) : "text-muted-foreground"}`}>
                         {scene.icon}
                       </span>
                       <div className="text-left">
-                        <div className="font-medium text-sm flex items-center gap-2">
+                        <div className="font-medium text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2">
                           {scene.title}
                           {!isAvailable && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                            <span className="text-[8px] sm:text-[10px] px-1 sm:px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                               SOON
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-muted-foreground">{scene.description}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground">{scene.description}</div>
                       </div>
                     </motion.button>
                   );

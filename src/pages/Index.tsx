@@ -70,20 +70,20 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative pb-20 sm:pb-24">
       <FloatingParticles />
       
       {/* Header */}
       <header className="border-b border-border/50 glass-strong sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-2 sm:gap-4"
             >
               <motion.div 
-                className="w-12 h-12 rounded-2xl flex items-center justify-center relative overflow-hidden"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center relative overflow-hidden"
                 style={{ background: 'var(--gradient-primary)' }}
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 animate={{ 
@@ -95,18 +95,18 @@ const Index = () => {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <span className="text-primary-foreground text-2xl font-bold">▶</span>
+                <span className="text-primary-foreground text-xl sm:text-2xl font-bold">▶</span>
               </motion.div>
               <div>
-                <h1 className="font-bold text-xl text-gradient-primary">CodeFlow</h1>
-                <p className="text-xs text-muted-foreground">Impara vedendo il codice</p>
+                <h1 className="font-bold text-lg sm:text-xl text-gradient-primary">CodeFlow</h1>
+                <p className="text-[10px] sm:text-xs text-muted-foreground">Impara vedendo il codice</p>
               </div>
             </motion.div>
 
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-sm text-muted-foreground hidden md:flex items-center gap-2"
+              className="text-xs sm:text-sm text-muted-foreground hidden md:flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
               Programmazione visuale interattiva
@@ -116,13 +116,13 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 relative z-10">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 relative z-10">
         {/* Scene Selector */}
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-          className="mb-10"
+          className="mb-6 sm:mb-10"
         >
           <SceneSelector currentScene={currentScene} onSceneChange={setCurrentScene} />
         </motion.section>
@@ -148,12 +148,12 @@ const Index = () => {
       </main>
 
       {/* Footer Hint */}
-      <footer className="fixed bottom-6 left-0 right-0 flex justify-center pointer-events-none z-50">
+      <footer className="fixed bottom-4 sm:bottom-6 left-2 right-2 sm:left-0 sm:right-0 flex justify-center pointer-events-none z-50">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="glass-strong rounded-full px-6 py-3 text-sm text-muted-foreground flex items-center gap-2"
+          className="glass-strong rounded-full px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm text-muted-foreground flex items-center gap-2"
         >
           <motion.span
             animate={{ rotate: [0, 10, -10, 0] }}
@@ -161,7 +161,8 @@ const Index = () => {
           >
             💡
           </motion.span>
-          Modifica i valori e osserva cosa succede
+          <span className="hidden sm:inline">Modifica i valori e osserva cosa succede</span>
+          <span className="sm:hidden">Modifica i valori</span>
         </motion.div>
       </footer>
     </div>
