@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 const ForLoopScene = () => {
   const [count, setCount] = useState(5);
@@ -173,6 +174,27 @@ const ForLoopScene = () => {
           {isAnimating ? "..." : "Esegui"}
         </button>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è un Ciclo FOR?"
+        description="Il ciclo FOR è una struttura di controllo che permette di ripetere un blocco di codice un numero specifico di volte. È composto da tre parti: inizializzazione, condizione e incremento. È ideale quando sai in anticipo quante iterazioni servono."
+        codeExample={`// Struttura base
+for (let i = 0; i < 5; i++) {
+  console.log(i);  // Stampa 0, 1, 2, 3, 4
+}
+
+// Iterare su un array
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i]);
+}`}
+        keyPoints={[
+          "Inizializzazione: let i = 0 (eseguita una sola volta)",
+          "Condizione: i < 5 (verificata prima di ogni iterazione)",
+          "Incremento: i++ (eseguito dopo ogni iterazione)",
+          "Perfetto per iterare su array o ripetere operazioni"
+        ]}
+      />
     </div>
   );
 };

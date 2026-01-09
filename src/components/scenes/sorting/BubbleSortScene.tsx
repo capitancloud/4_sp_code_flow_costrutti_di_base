@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Pause, RotateCcw, StepForward, Shuffle } from "lucide-react";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 type SortState = "idle" | "comparing" | "swapping" | "sorted" | "complete";
 
@@ -391,19 +392,28 @@ const BubbleSortScene = () => {
       </div>
 
       {/* Algorithm explanation */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="glass rounded-2xl p-4 sm:p-6"
-      >
-        <h3 className="font-mono text-sm font-bold text-primary mb-2">Come funziona</h3>
-        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-          Il <span className="text-foreground font-medium">Bubble Sort</span> confronta coppie di elementi adiacenti 
-          e li scambia se sono nell'ordine sbagliato. Dopo ogni passata, l'elemento più grande "galleggia" 
-          verso la fine dell'array. Complessità: O(n²)
-        </p>
-      </motion.div>
+      <ConceptExplainer
+        title="Cos'è il Bubble Sort?"
+        description="Il Bubble Sort è un algoritmo di ordinamento semplice che confronta ripetutamente coppie di elementi adiacenti e li scambia se sono nell'ordine sbagliato. Il nome deriva dal fatto che gli elementi più grandi 'galleggiano' verso la fine dell'array come bolle."
+        codeExample={`function bubbleSort(arr) {
+  let n = arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // Scambio
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+}`}
+        keyPoints={[
+          "Complessità temporale: O(n²) nel caso peggiore e medio",
+          "Complessità spaziale: O(1) - ordina in-place",
+          "Stabile: mantiene l'ordine relativo di elementi uguali",
+          "Semplice da implementare ma inefficiente per grandi dataset"
+        ]}
+      />
     </div>
   );
 };

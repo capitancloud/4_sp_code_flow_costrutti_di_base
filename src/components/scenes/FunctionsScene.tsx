@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 type FunctionType = "double" | "square" | "increment";
 
@@ -218,6 +219,29 @@ const FunctionsScene = () => {
           {isAnimating ? "..." : "Esegui"}
         </button>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è una Funzione?"
+        description="Una funzione è un blocco di codice riutilizzabile che esegue un compito specifico. Riceve input (parametri), elabora i dati e restituisce un output (valore di ritorno). Le funzioni sono fondamentali per organizzare il codice e evitare ripetizioni."
+        codeExample={`// Definizione
+function raddoppia(numero) {
+  return numero * 2;
+}
+
+// Utilizzo
+let risultato = raddoppia(5);
+console.log(risultato);  // 10
+
+// Arrow function (sintassi moderna)
+const quadrato = (x) => x * x;`}
+        keyPoints={[
+          "I parametri sono gli input della funzione",
+          "'return' restituisce il valore calcolato",
+          "Le funzioni promuovono il riutilizzo del codice",
+          "Arrow functions offrono una sintassi più compatta"
+        ]}
+      />
     </div>
   );
 };
