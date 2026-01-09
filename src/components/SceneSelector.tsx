@@ -9,9 +9,9 @@ interface Scene {
 }
 
 const scenes: Scene[] = [
+  { id: "variables", title: "Variabili", icon: "□", description: "Memoria e stato", color: "accent" },
   { id: "if-else", title: "IF / ELSE", icon: "⑂", description: "Decisione binaria", color: "primary" },
   { id: "for-loop", title: "FOR Loop", icon: "↻", description: "Ripetizione controllata", color: "secondary" },
-  { id: "variables", title: "Variabili", icon: "□", description: "Memoria e stato", color: "accent" },
   { id: "functions", title: "Funzioni", icon: "ƒ", description: "Input → Output", color: "warning" },
   { id: "arrays", title: "Array", icon: "▤", description: "Liste indicizzate", color: "primary" },
   { id: "events", title: "Eventi", icon: "⚡", description: "Trigger → Reazione", color: "secondary" },
