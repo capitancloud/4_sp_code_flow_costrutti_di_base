@@ -29,6 +29,9 @@ import EventsPage from "./pages/animations/EventsPage";
 // Ordinamento
 import BubbleSortPage from "./pages/animations/BubbleSortPage";
 
+// Integrazione
+import CompleteFlowPage from "./pages/animations/CompleteFlowPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -62,6 +65,9 @@ const App = () => (
           
           {/* Ordinamento */}
           <Route path="/animations/bubble-sort" element={<BubbleSortPage />} />
+          
+          {/* Integrazione */}
+          <Route path="/animations/complete-flow" element={<CompleteFlowPage />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
