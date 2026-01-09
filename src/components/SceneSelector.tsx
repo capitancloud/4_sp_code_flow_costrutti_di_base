@@ -130,7 +130,7 @@ const SceneSelector = ({ currentScene, onSceneChange }: SceneSelectorProps) => {
   };
 
   const isSceneAvailable = (sceneId: string) => {
-    const availableScenes = ["variables", "if-else", "for-loop", "functions", "arrays", "events"];
+    const availableScenes = ["variables", "if-else", "if-else-if", "switch", "for-loop", "functions", "arrays", "events"];
     return availableScenes.includes(sceneId);
   };
 
