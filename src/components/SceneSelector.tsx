@@ -13,6 +13,7 @@ const scenes: Scene[] = [
   { id: "for-loop", title: "FOR Loop", icon: "↻", description: "Ripetizione controllata", color: "secondary" },
   { id: "variables", title: "Variabili", icon: "□", description: "Memoria e stato", color: "accent" },
   { id: "functions", title: "Funzioni", icon: "ƒ", description: "Input → Output", color: "warning" },
+  { id: "arrays", title: "Array", icon: "▤", description: "Liste indicizzate", color: "primary" },
 ];
 
 interface SceneSelectorProps {
