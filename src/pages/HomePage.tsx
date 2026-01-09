@@ -14,46 +14,125 @@ interface AnimationCard {
 }
 
 const animations: AnimationCard[] = [
-  // Sorting
+  // Fondamenti
+  {
+    id: "variables",
+    title: "Variabili",
+    description: "Contenitori dinamici che memorizzano e modificano valori",
+    path: "/animations/variables",
+    category: "Fondamenti",
+    gradient: "from-blue-500 to-cyan-500",
+    icon: "📦",
+  },
+  // Selezione
+  {
+    id: "if-else",
+    title: "IF / ELSE",
+    description: "Decisione binaria con due percorsi possibili",
+    path: "/animations/if-else",
+    category: "Selezione",
+    gradient: "from-violet-500 to-purple-500",
+    icon: "🔀",
+  },
+  {
+    id: "if-else-if",
+    title: "IF / ELSE IF / ELSE",
+    description: "Valutazione sequenziale a cascata di condizioni",
+    path: "/animations/if-else-if",
+    category: "Selezione",
+    gradient: "from-purple-500 to-pink-500",
+    icon: "🔃",
+  },
+  {
+    id: "switch",
+    title: "SWITCH / CASE",
+    description: "Selezione multipla con percorsi paralleli",
+    path: "/animations/switch",
+    category: "Selezione",
+    gradient: "from-pink-500 to-rose-500",
+    icon: "🎛️",
+  },
+  // Iterazione
+  {
+    id: "for-loop",
+    title: "FOR Loop",
+    description: "Ripetizione controllata con contatore",
+    path: "/animations/for-loop",
+    category: "Iterazione",
+    gradient: "from-green-500 to-emerald-500",
+    icon: "🔁",
+  },
+  // Strutture Dati
+  {
+    id: "arrays",
+    title: "Array / Liste",
+    description: "Strutture lineari con inserimento e rimozione",
+    path: "/animations/arrays",
+    category: "Strutture Dati",
+    gradient: "from-amber-500 to-orange-500",
+    icon: "📊",
+  },
+  // Astrazione
+  {
+    id: "functions",
+    title: "Funzioni",
+    description: "Blocchi riutilizzabili con input e output",
+    path: "/animations/functions",
+    category: "Astrazione",
+    gradient: "from-teal-500 to-cyan-500",
+    icon: "⚡",
+  },
+  // Reattività
+  {
+    id: "events",
+    title: "Eventi",
+    description: "Trigger, listener e callback reattivi",
+    path: "/animations/events",
+    category: "Reattività",
+    gradient: "from-rose-500 to-red-500",
+    icon: "🎯",
+  },
+  // Ordinamento
   {
     id: "bubble-sort",
     title: "Bubble Sort",
-    description: "Elementi adiacenti confrontati e scambiati fino all'ordine",
+    description: "Elementi adiacenti confrontati e scambiati",
     path: "/animations/bubble-sort",
     category: "Ordinamento",
     gradient: "from-orange-500 to-red-500",
     icon: "🫧",
   },
-  // More to come...
 ];
 
 const categories = [
-  { id: "sorting", label: "Ordinamento", color: "text-orange-400" },
-  { id: "search", label: "Ricerca", color: "text-blue-400" },
-  { id: "data-structures", label: "Strutture Dati", color: "text-purple-400" },
-  { id: "graphs", label: "Grafi", color: "text-green-400" },
+  { id: "fondamenti", label: "Fondamenti", color: "text-cyan-400" },
+  { id: "selezione", label: "Selezione", color: "text-purple-400" },
+  { id: "iterazione", label: "Iterazione", color: "text-green-400" },
+  { id: "strutture-dati", label: "Strutture Dati", color: "text-orange-400" },
+  { id: "astrazione", label: "Astrazione", color: "text-teal-400" },
+  { id: "reattivita", label: "Reattività", color: "text-rose-400" },
+  { id: "ordinamento", label: "Ordinamento", color: "text-red-400" },
 ];
 
-const HomePage = () => {
-  const groupedAnimations = categories.map(cat => ({
-    ...cat,
-    items: animations.filter(a => a.category === cat.label),
-  })).filter(cat => cat.items.length > 0);
+const getCategoryColor = (categoryLabel: string) => {
+  return categories.find(c => c.label === categoryLabel)?.color || "text-muted-foreground";
+};
 
+const HomePage = () => {
   return (
-    <AnimationLayout title="Algoritmi Visuali" description="Esplora e comprendi gli algoritmi attraverso animazioni interattive">
+    <AnimationLayout title="Algoritmi Visuali" description="Esplora e comprendi i concetti di programmazione attraverso animazioni interattive">
       <div className="flex flex-col gap-8 sm:gap-12">
-        {/* Hero cards */}
+        {/* Animation cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {animations.map((animation, index) => (
             <Link key={animation.id} to={animation.path}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, y: -5 }}
                 whileTap={{ scale: 0.98 }}
-                className="group glass rounded-2xl p-5 sm:p-6 cursor-pointer border border-border/50 hover:border-primary/50 transition-all"
+                className="group glass rounded-2xl p-5 sm:p-6 cursor-pointer border border-border/50 hover:border-primary/50 transition-all h-full"
               >
                 <div className="flex items-start justify-between mb-4">
                   <motion.div 
@@ -72,7 +151,7 @@ const HomePage = () => {
                   </motion.div>
                 </div>
                 
-                <span className={`text-xs font-mono ${categories.find(c => c.label === animation.category)?.color || 'text-muted-foreground'}`}>
+                <span className={`text-xs font-mono ${getCategoryColor(animation.category)}`}>
                   {animation.category}
                 </span>
                 
@@ -83,26 +162,6 @@ const HomePage = () => {
                 <p className="text-sm text-muted-foreground line-clamp-2">
                   {animation.description}
                 </p>
-
-                {/* Animated bar preview */}
-                <div className="flex items-end gap-1 h-8 mt-4">
-                  {[4, 7, 2, 9, 5, 3, 8].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      className={`flex-1 rounded-t bg-gradient-to-t ${animation.gradient} opacity-30 group-hover:opacity-60`}
-                      style={{ height: `${h * 10}%` }}
-                      animate={{ 
-                        height: [`${h * 10}%`, `${((h + 3) % 10) * 10}%`, `${h * 10}%`],
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        delay: i * 0.1, 
-                        repeat: Infinity,
-                        ease: "easeInOut" 
-                      }}
-                    />
-                  ))}
-                </div>
               </motion.div>
             </Link>
           ))}
@@ -111,8 +170,8 @@ const HomePage = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: animations.length * 0.1 }}
-            className="glass rounded-2xl p-5 sm:p-6 border border-dashed border-border/50 flex flex-col items-center justify-center text-center min-h-[200px]"
+            transition={{ delay: animations.length * 0.05 }}
+            className="glass rounded-2xl p-5 sm:p-6 border border-dashed border-border/50 flex flex-col items-center justify-center text-center min-h-[180px]"
           >
             <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center text-2xl mb-4">
               ✨
