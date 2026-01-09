@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 interface Variable {
   name: string;
@@ -184,6 +185,24 @@ const VariablesScene = () => {
           ))}
         </div>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è una Variabile?"
+        description="Una variabile è un contenitore che memorizza un valore nella memoria del computer. Puoi pensarla come una scatola etichettata: il nome è l'etichetta, il valore è ciò che contiene. Il valore può essere modificato durante l'esecuzione del programma."
+        codeExample={`// Dichiarazione e assegnazione
+let x = 5;
+let nome = "Mario";
+
+// Modifica del valore
+x = 10;  // x ora vale 10`}
+        keyPoints={[
+          "Ogni variabile ha un nome univoco che la identifica",
+          "Il valore può cambiare (mutabilità)",
+          "Esistono diversi tipi: numeri, stringhe, booleani, ecc.",
+          "let e const sono le parole chiave per dichiarare variabili in JavaScript"
+        ]}
+      />
     </div>
   );
 };

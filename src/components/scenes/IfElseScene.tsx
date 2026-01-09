@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 const IfElseScene = () => {
   const [value, setValue] = useState(5);
@@ -359,6 +360,32 @@ const IfElseScene = () => {
           </span>
         </motion.button>
       </motion.div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è IF/ELSE?"
+        description="IF/ELSE è una struttura condizionale che permette al programma di prendere decisioni. Se la condizione è vera (true), viene eseguito il blocco IF; altrimenti viene eseguito il blocco ELSE. È il fondamento della logica decisionale in programmazione."
+        codeExample={`// Struttura base
+if (valore >= 5) {
+  console.log("Condizione vera!");
+} else {
+  console.log("Condizione falsa!");
+}
+
+// Esempio pratico
+let età = 18;
+if (età >= 18) {
+  console.log("Maggiorenne");
+} else {
+  console.log("Minorenne");
+}`}
+        keyPoints={[
+          "La condizione viene valutata come true o false",
+          "Solo uno dei due percorsi viene eseguito",
+          "Il blocco ELSE è opzionale",
+          "Si possono usare operatori: ==, !=, <, >, <=, >="
+        ]}
+      />
     </div>
   );
 };

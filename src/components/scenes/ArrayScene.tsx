@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 type Action = "idle" | "inserting" | "accessing" | "removing";
 
@@ -240,6 +241,29 @@ const ArrayScene = () => {
           Reset
         </button>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è un Array?"
+        description="Un array è una struttura dati che contiene una collezione ordinata di elementi. Ogni elemento ha un indice numerico che parte da 0. Gli array permettono di memorizzare e manipolare gruppi di dati correlati in modo efficiente."
+        codeExample={`// Creazione
+let numeri = [3, 7, 2, 9];
+
+// Accesso (indice parte da 0)
+console.log(numeri[0]);  // 3
+console.log(numeri[2]);  // 2
+
+// Modifica
+numeri.push(5);     // Aggiunge alla fine
+numeri.pop();       // Rimuove l'ultimo
+numeri.length;      // Lunghezza: 4`}
+        keyPoints={[
+          "Gli indici partono da 0, non da 1",
+          "push() aggiunge elementi alla fine",
+          "pop() rimuove l'ultimo elemento",
+          "La proprietà .length restituisce il numero di elementi"
+        ]}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 const IfElseIfScene = () => {
   const [value, setValue] = useState(75);
@@ -229,6 +230,27 @@ const IfElseIfScene = () => {
           <span>Saltato</span>
         </div>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è IF/ELSE IF/ELSE?"
+        description="Quando hai bisogno di valutare più condizioni in sequenza, usi la catena IF/ELSE IF/ELSE. Le condizioni vengono controllate dall'alto verso il basso, e appena una risulta vera, il suo blocco viene eseguito e gli altri vengono ignorati."
+        codeExample={`if (voto >= 90) {
+  console.log("Eccellente");
+} else if (voto >= 70) {
+  console.log("Buono");
+} else if (voto >= 50) {
+  console.log("Sufficiente");
+} else {
+  console.log("Insufficiente");
+}`}
+        keyPoints={[
+          "Le condizioni sono valutate in ordine sequenziale",
+          "Solo il primo blocco con condizione vera viene eseguito",
+          "L'ELSE finale cattura tutti i casi rimanenti",
+          "L'ordine delle condizioni è fondamentale per la logica corretta"
+        ]}
+      />
     </div>
   );
 };

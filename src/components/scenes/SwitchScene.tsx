@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 const SwitchScene = () => {
   const [value, setValue] = useState<string>("B");
@@ -252,6 +253,28 @@ const SwitchScene = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cos'è SWITCH/CASE?"
+        description="Lo SWITCH è un costrutto di selezione multipla che confronta un valore con diversi casi (case). A differenza di IF/ELSE IF, lo switch è più leggibile quando hai molti valori da confrontare con uguaglianza. Il caso 'default' gestisce tutti i valori non previsti."
+        codeExample={`switch (giorno) {
+  case "Lunedì":
+    console.log("Inizio settimana");
+    break;
+  case "Venerdì":
+    console.log("Quasi weekend!");
+    break;
+  default:
+    console.log("Giorno normale");
+}`}
+        keyPoints={[
+          "Confronta il valore con uguaglianza stretta (===)",
+          "Il 'break' è essenziale per uscire dopo un match",
+          "Senza break, l'esecuzione 'cade' nel caso successivo (fall-through)",
+          "'default' è opzionale ma consigliato per gestire casi imprevisti"
+        ]}
+      />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, RotateCcw, Pause, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 interface Variable {
   name: string;
@@ -483,6 +484,33 @@ const CompleteFlowScene = () => {
           </div>
         </div>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Come lavorano insieme i costrutti?"
+        description="In un programma reale, variabili, array, cicli, condizioni e funzioni cooperano per risolvere problemi complessi. Questo esempio mostra come calcolare la somma dei numeri pari: l'array contiene i dati, il ciclo itera, la condizione filtra, la funzione calcola e la variabile accumula il risultato."
+        codeExample={`function sommaPari(numeri) {
+  let somma = 0;
+  
+  for (let i = 0; i < numeri.length; i++) {
+    if (numeri[i] % 2 === 0) {
+      somma = aggiungi(somma, numeri[i]);
+    }
+  }
+  
+  return somma;
+}
+
+function aggiungi(a, b) {
+  return a + b;
+}`}
+        keyPoints={[
+          "Le variabili memorizzano stato e risultati intermedi",
+          "I cicli permettono di processare collezioni di dati",
+          "Le condizioni filtrano e dirigono il flusso di esecuzione",
+          "Le funzioni incapsulano logica riutilizzabile"
+        ]}
+      />
     </div>
   );
 };

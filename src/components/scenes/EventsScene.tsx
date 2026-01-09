@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ConceptExplainer from "@/components/ui/ConceptExplainer";
 
 type EventType = "click" | "timer" | "hover";
 type Phase = "idle" | "triggered" | "traveling" | "listening" | "reacting";
@@ -303,6 +304,32 @@ const EventsScene = () => {
           Reset
         </button>
       </div>
+
+      {/* Concept Explainer */}
+      <ConceptExplainer
+        title="Cosa sono gli Eventi?"
+        description="Gli eventi sono azioni che si verificano nel browser (click, hover, timer, input, ecc.). La programmazione a eventi permette di rispondere a queste azioni eseguendo codice specifico. Il pattern base prevede un trigger (evento), un listener (ascoltatore) e un callback (funzione di reazione)."
+        codeExample={`// Event listener
+button.addEventListener("click", function() {
+  console.log("Bottone cliccato!");
+});
+
+// Hover
+elemento.addEventListener("mouseenter", () => {
+  elemento.style.color = "blue";
+});
+
+// Timer
+setInterval(() => {
+  console.log("Tick!");
+}, 1000);`}
+        keyPoints={[
+          "addEventListener() registra un listener per un evento specifico",
+          "Il callback è la funzione eseguita quando l'evento si verifica",
+          "Gli eventi 'propagano' dal target verso gli elementi parent",
+          "setInterval e setTimeout sono eventi basati sul tempo"
+        ]}
+      />
     </div>
   );
 };
