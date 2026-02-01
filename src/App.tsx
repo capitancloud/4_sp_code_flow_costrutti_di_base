@@ -3,7 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 
 // Fondamenti
@@ -34,45 +36,60 @@ import CompleteFlowPage from "./pages/animations/CompleteFlowPage";
 
 const queryClient = new QueryClient();
 
+// Protected routes wrapper
+const ProtectedRoutes = () => {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      
+      {/* Fondamenti */}
+      <Route path="/animations/variables" element={<VariablesPage />} />
+      
+      {/* Selezione */}
+      <Route path="/animations/if-else" element={<IfElsePage />} />
+      <Route path="/animations/if-else-if" element={<IfElseIfPage />} />
+      <Route path="/animations/switch" element={<SwitchPage />} />
+      
+      {/* Iterazione */}
+      <Route path="/animations/for-loop" element={<ForLoopPage />} />
+      
+      {/* Strutture Dati */}
+      <Route path="/animations/arrays" element={<ArraysPage />} />
+      
+      {/* Astrazione */}
+      <Route path="/animations/functions" element={<FunctionsPage />} />
+      
+      {/* Reattività */}
+      <Route path="/animations/events" element={<EventsPage />} />
+      
+      {/* Ordinamento */}
+      <Route path="/animations/bubble-sort" element={<BubbleSortPage />} />
+      
+      {/* Integrazione */}
+      <Route path="/animations/complete-flow" element={<CompleteFlowPage />} />
+      
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          
-          {/* Fondamenti */}
-          <Route path="/animations/variables" element={<VariablesPage />} />
-          
-          {/* Selezione */}
-          <Route path="/animations/if-else" element={<IfElsePage />} />
-          <Route path="/animations/if-else-if" element={<IfElseIfPage />} />
-          <Route path="/animations/switch" element={<SwitchPage />} />
-          
-          {/* Iterazione */}
-          <Route path="/animations/for-loop" element={<ForLoopPage />} />
-          
-          {/* Strutture Dati */}
-          <Route path="/animations/arrays" element={<ArraysPage />} />
-          
-          {/* Astrazione */}
-          <Route path="/animations/functions" element={<FunctionsPage />} />
-          
-          {/* Reattività */}
-          <Route path="/animations/events" element={<EventsPage />} />
-          
-          {/* Ordinamento */}
-          <Route path="/animations/bubble-sort" element={<BubbleSortPage />} />
-          
-          {/* Integrazione */}
-          <Route path="/animations/complete-flow" element={<CompleteFlowPage />} />
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ProtectedRoutes />
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import LogoutButton from "@/components/LogoutButton";
 
 interface AnimationLayoutProps {
   children: ReactNode;
@@ -102,10 +103,13 @@ const AnimationLayout = ({ children, title, description }: AnimationLayoutProps)
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xs sm:text-sm text-muted-foreground hidden md:flex items-center gap-2"
+              className="flex items-center gap-4"
             >
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              Programmazione visuale interattiva
+              <div className="text-xs sm:text-sm text-muted-foreground hidden md:flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                Programmazione visuale interattiva
+              </div>
+              <LogoutButton />
             </motion.div>
           </div>
         </div>
