@@ -132,15 +132,6 @@ const LoginPage = () => {
             </motion.div>
           </form>
 
-          {/* Footer hint */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center text-xs text-muted-foreground/60 mt-6"
-          >
-            Il codice viene verificato in modo sicuro tramite hash
-          </motion.p>
         </div>
       </motion.div>
     </div>
