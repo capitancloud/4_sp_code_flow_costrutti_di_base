@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import AnimationLayout from "@/components/layout/AnimationLayout";
 import { ArrowRight } from "lucide-react";
-import superProgrammatoreLogo from "@/assets/super-programmatore-logo.png";
 
 interface AnimationCard {
   id: string;
@@ -134,20 +133,6 @@ const HomePage = () => {
   return (
     <AnimationLayout title="Algoritmi Visuali" description="Esplora e comprendi i concetti di programmazione attraverso animazioni interattive">
       <div className="flex flex-col gap-8 sm:gap-12">
-        {/* Logo Super Programmatore */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center"
-        >
-          <img 
-            src={superProgrammatoreLogo} 
-            alt="Super Programmatore" 
-            className="w-48 sm:w-64 md:w-80 h-auto object-contain"
-          />
-        </motion.div>
-
         {/* Animation cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {animations.map((animation, index) => (

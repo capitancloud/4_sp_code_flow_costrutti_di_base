@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { verifyAccessCode } from '@/lib/auth';
 import { useAuth } from '@/contexts/AuthContext';
+import superProgrammatoreLogo from '@/assets/super-programmatore-logo.png';
 
 const LoginPage = () => {
   const [code, setCode] = useState('');
@@ -42,14 +43,18 @@ const LoginPage = () => {
         className="w-full max-w-md"
       >
         <div className="glass rounded-2xl p-8 border border-border/50">
-          {/* Logo/Icon */}
+          {/* Logo */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", delay: 0.1 }}
-            className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center"
+            className="flex justify-center mb-6"
           >
-            <Lock className="w-10 h-10 text-primary-foreground" />
+            <img 
+              src={superProgrammatoreLogo} 
+              alt="Super Programmatore" 
+              className="w-48 sm:w-56 h-auto object-contain"
+            />
           </motion.div>
 
           {/* Title */}
